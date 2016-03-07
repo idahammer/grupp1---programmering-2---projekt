@@ -1,5 +1,6 @@
 package se.mah.kd405a_group1.medea;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -10,8 +11,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 
 public class ScreenGUI extends JFrame {
 
@@ -62,4 +63,5 @@ public class ScreenGUI extends JFrame {
 		lblMylabel.setBounds(77, 184, 235, 154);
 		contentPane.add(lblMylabel);
 	}
+
 }
