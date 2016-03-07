@@ -46,7 +46,7 @@ public class ScreenGUI extends JFrame {
 		this.setBounds(0, 0, (int)width, (int)height); 
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -56,11 +56,11 @@ public class ScreenGUI extends JFrame {
 		panel_1.setBounds(50, 50, 50, 50);
 		contentPane.add(panel_1);
 		
-		JLabel lblMylabel = new JLabel("InfoScreen");
-		lblMylabel.setForeground(Color.WHITE);
+		JLabel lblMylabel = new JLabel("InfoScreen - GRUPP1");
+		lblMylabel.setForeground(Color.BLACK);
 		lblMylabel.setBackground(SystemColor.inactiveCaptionBorder);
 		lblMylabel.setFont(new Font("Century Gothic", lblMylabel.getFont().getStyle(), 29));
-		lblMylabel.setBounds(77, 184, 235, 154);
+		lblMylabel.setBounds(77, 184, 295, 154);
 		contentPane.add(lblMylabel);
 	}
 
