@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
 
 public class ScreenGUI extends JFrame {
 
@@ -51,17 +52,16 @@ public class ScreenGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.BLACK);
-		panel_1.setBounds(50, 50, 50, 50);
-		contentPane.add(panel_1);
-		
 		JLabel lblMylabel = new JLabel("InfoScreen - GRUPP1");
 		lblMylabel.setForeground(Color.BLACK);
 		lblMylabel.setBackground(SystemColor.inactiveCaptionBorder);
 		lblMylabel.setFont(new Font("Century Gothic", lblMylabel.getFont().getStyle(), 29));
-		lblMylabel.setBounds(77, 184, 450, 154);
+		lblMylabel.setBounds(50, 321, 450, 154);
 		contentPane.add(lblMylabel);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ScreenGUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea_logo.jpg")));
+		lblNewLabel.setBounds(50, 50, 210, 259);
+		contentPane.add(lblNewLabel);
 	}
-
 }
