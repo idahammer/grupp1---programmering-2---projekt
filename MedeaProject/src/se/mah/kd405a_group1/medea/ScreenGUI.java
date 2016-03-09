@@ -60,7 +60,7 @@ public class ScreenGUI extends JFrame {
 		lblMylabel.setForeground(Color.BLACK);
 		lblMylabel.setBackground(SystemColor.inactiveCaptionBorder);
 		lblMylabel.setFont(new Font("Century Gothic", lblMylabel.getFont().getStyle(), 29));
-		lblMylabel.setBounds(77, 184, 295, 154);
+		lblMylabel.setBounds(77, 184, 450, 154);
 		contentPane.add(lblMylabel);
 	}
 
