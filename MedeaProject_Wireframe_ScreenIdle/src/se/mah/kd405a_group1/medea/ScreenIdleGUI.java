@@ -59,7 +59,7 @@ public class ScreenIdleGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ScreenIdleGUI.class.getResource("/se/mah/kd405a_group1/medea/res/wireframe.png")));
+		lblNewLabel.setIcon(new ImageIcon(ScreenIdleGUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_1-01.jpg")));
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 	}
