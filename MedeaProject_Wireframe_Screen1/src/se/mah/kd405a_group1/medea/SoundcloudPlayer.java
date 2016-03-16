@@ -1,8 +1,11 @@
 package se.mah.kd405a_group1.medea;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -14,7 +17,9 @@ import javax.sound.sampled.SourceDataLine;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import com.soundcloud.api.ApiWrapper;
 import com.soundcloud.api.Http;
@@ -26,17 +31,67 @@ public class SoundcloudPlayer {
 	static final String clientId = "207f6c2075addf48873c9b0f281de38a";
 	static final String clientSecret = "9a11033e386b15d510baddd16271e908";
 
+	String user;
+	
+	/** Contains the available tracks on soundcloud */
+	ArrayList<Track> tracks;
 
-	public SoundcloudPlayer(String trackURI) {
+	public SoundcloudPlayer(String user) {
+		// Set username.
+		this.user = user;
+		
+		// Create list for tracks.
+		this.tracks = new ArrayList<Track>();
+
 		try {
 			// Get user info.
-			// getResource("/users/medea-vox");
+			// getResource("/users/" + this.user);
 			
 			// Get tracks.
-			// getResource("/users/medea-vox/tracks");
+			JSONObject jsonTracks = getResource("/users/" + this.user + "/tracks" + "?client_id=" + clientId, true);
+			JSONArray tracks = jsonTracks.getJSONArray("array");
 
+			// Add tracks to list.
+			Iterator<Object> it = tracks.iterator();
+			while(it.hasNext()){
+				JSONObject jsonTrack = (JSONObject)(it.next());
+				this.tracks.add(new Track(jsonTrack));
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		System.out.println("Available tracks:");
+		for(Track track : this.tracks) {
+			System.out.println(track.title);
+		}
+	}
+
+	/**
+	 * Number of available tracks.
+	 * @return Number of available tracks.
+	 */
+	public int getNumberOfTracks() {
+		return tracks.size();
+	}
+	
+	/**
+	 * Returns a track object..
+	 * @param index Index of the track.
+	 * @return Requested track.
+	 */
+	public Track getTrack(int index) {
+		return tracks.get(index);
+	}
+	
+	/**
+	 * Play a track from soundcloud.
+	 * @param trackURI URI of the track.
+	 */
+	public void playTrack(String trackURI) {
+		try {
 			// Get track info.
-			SoundcloudTrack track = new SoundcloudTrack(getResource(trackURI + "?client_id=" + clientId));
+			Track track = new Track(getResource(trackURI + "?client_id=" + clientId, false));
 			
 			// Play track.
 			track.play();
@@ -44,37 +99,87 @@ public class SoundcloudPlayer {
 			ex.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Represents a Soundcloud track.
 	 */
-	class SoundcloudTrack {
+	public class Track {
 		/** URL to the track. */
-		public String url;
+		private String url;
 		
 		/** Title of the track. */
-		public String title;
+		private String title;
 		
 		/** Create/modify date */
-		public String date;
+		private String date;
 		
 		/** Description of track */
-		public String description;
+		private String description;
 		
-		/** URL to thte waveform image */
-		public String waveformUrl;
+		/** URL to the artwork image */
+		private String artworkUrl;
+		
+		/** URL to the waveform image */
+		private String waveformUrl;
+		
+		/** Current play position in ms */
+		private int currentPos;
+		
+		/** Track duration in ms */
+		private int duration; 
 		
 		/**
 		 * Track constructor.
 		 * @param jsonTrack Track info.
 		 */
-		public SoundcloudTrack(JSONObject jsonTrack) {
+		public Track(JSONObject jsonTrack) {
 			this.url = jsonTrack.getString("download_url");
 			this.title = jsonTrack.getString("title");
 			this.date = jsonTrack.getString("last_modified");
 			this.description = jsonTrack.getString("description");
 			this.waveformUrl = jsonTrack.getString("waveform_url");
+			this.currentPos = 0;
+			this.duration = jsonTrack.getInt("duration");
+
+			// Get artwork URL.
+			if(!jsonTrack.isNull("artwork_url")) {
+				this.artworkUrl = jsonTrack.getString("artwork_url");
+			} else {
+				this.artworkUrl = "";
+			}
 		}
+
+		/**
+		 * Title of the track.
+		 * @return Title of the track.
+		 */
+		public String getTitle() {
+			return this.title;
+		} 
+		
+		/**
+		 * Create/modify date of the track.
+		 * @return Create/modify date of the track.
+		 */
+		public String getDate() {
+			return this.date;
+		} 
+		
+		/**
+		 * Description of the track.
+		 * @return Description of the track.
+		 */
+		public String getDescription() {
+			return this.description;
+		} 
+		
+		/**
+		 * URL to a image of the tracks waveform.
+		 * @return URL to a image of the tracks waveform.
+		 */
+		public String getWaveformURL() {
+			return this.waveformUrl;
+		} 
 		
 		/**
 		 * Retries the URL of the stream from the track info.
@@ -86,7 +191,7 @@ public class SoundcloudPlayer {
 			// JSONObject jsonDownload = new JSONObject(new JSONTokener(new
 			// URL(track.url).openStream()));
 			// JSONObject jsonDownload = getResource(track.url"https://api.soundcloud.com/tracks/249648982/download?client_id=" + clientId);
-			JSONObject jsonDownload = getResource(this.url + "?client_id=" + clientId);
+			JSONObject jsonDownload = getResource(this.url + "?client_id=" + clientId, false);
 			String downloadURL = jsonDownload.getString("location");
 
 			// Play stream.
@@ -98,103 +203,117 @@ public class SoundcloudPlayer {
 		 * @param url URL to track that should be played.
 		 */
 		public void play() {
-			// Create a new thread for playback.
-			new Thread(new Runnable() {
-				public void run() {
-					try {
-						// Ugly way of looping audio.
-						while (true) {
-							/*
-							// Open audio stream.
-							InputStream inputStream = url.openStream();
-							BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-							AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
-							*/
-
-							
-							// Open audio stream.
-							MpegAudioFileReader mpgFileReader = new MpegAudioFileReader();
-							InputStream is = getURL().openStream();
-							AudioInputStream inputStream = mpgFileReader.getAudioInputStream(is);
-
-							// Setup format.
-							AudioFormat baseFormat = inputStream.getFormat();
-							AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
-									baseFormat.getSampleRate(), 16, baseFormat.getChannels(), baseFormat.getChannels() * 2,
-									baseFormat.getSampleRate(), false);
-							
-							// Open input stream.
-							AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(targetFormat, inputStream);
-
-							// Play audio.
-							rawplay(targetFormat, audioInputStream);
-
-							// Close stream.
-							audioInputStream.close();
-
-							// Stop if thread is interrupted.
-							if (Thread.interrupted()) {
-								break;
-							}
-							try {
-								Thread.sleep(1);
-							} catch (InterruptedException iex) {
-								break;
-							}
-						}
-					} catch (Exception e) {
-						// Unexpected error.
-						System.out.println(e.getMessage());
-						e.printStackTrace();
-					}
-				}
-			}).start();
+			new PlaybackThread().start();
 		}
-
+		
 		/**
-		 * Plays a raw stream.
-		 * @param targetFormat Output format.
-		 * @param inputStream Stream containing raw data.
-		 * @throws IOException 
-		 * @throws LineUnavailableException
+		 * Handels track playback.
 		 */
-		private void rawplay(AudioFormat targetFormat, AudioInputStream inputStream)
-				throws IOException, LineUnavailableException {
-			byte[] audioBuffer = new byte[4096];
+		private class PlaybackThread extends Thread {
+			/**
+			 * Handels playback.
+			 */
+			@Override
+			public void run() {
+				try {
+					// Ugly way of looping audio.
+					while (true) {
+						/*
+						// Open audio stream.
+						InputStream inputStream = url.openStream();
+						BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+						AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
+						*/
 
-			SourceDataLine line = getLine(targetFormat);
-			if (line != null) {
-				int bytesRead = 0;
-				int bytesWritten = 0;
+						
+						// Open audio stream.
+						MpegAudioFileReader mpgFileReader = new MpegAudioFileReader();
+						InputStream is = getURL().openStream();
+						AudioInputStream inputStream = mpgFileReader.getAudioInputStream(new BufferedInputStream(is));
 
-				// Start audio output.
-				line.start();
+						// Setup format.
+						AudioFormat baseFormat = inputStream.getFormat();
+						AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+								baseFormat.getSampleRate(), 16, baseFormat.getChannels(), baseFormat.getChannels() * 2,
+								baseFormat.getSampleRate(), false);
+						
+						// Open input stream.
+						AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(targetFormat, inputStream);
 
-				while (bytesRead != -1) {
-					// Read audio buffer.
-					bytesRead = inputStream.read(audioBuffer, 0, audioBuffer.length);
+						// Play audio.
+						rawplay(targetFormat, audioInputStream);
 
-					// Only write out data if available.
-					if (bytesRead != -1) {
-						// Write to output.
-						bytesWritten = line.write(audioBuffer, 0, bytesRead);
+						// Close stream.
+						audioInputStream.close();
+
+						// Stop if thread is interrupted.
+						if (Thread.interrupted()) {
+							break;
+						}
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException iex) {
+							break;
+						}
 					}
+				} catch (Exception e) {
+					// Unexpected error.
+					System.out.println(e.getMessage());
+					e.printStackTrace();
 				}
-
-				// Stop and close output and stream.
-				line.drain();
-				line.stop();
-				line.close();
-				inputStream.close();
 			}
-		}
 
-		private SourceDataLine getLine(AudioFormat audioFormat) throws LineUnavailableException {
-			SourceDataLine res = null;
-			DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
-			res = (SourceDataLine) AudioSystem.getLine(info);
-			res.open(audioFormat);
-			return res;
+			/**
+			 * Plays a raw stream.
+			 * @param targetFormat Output format.
+			 * @param inputStream Stream containing raw data.
+			 * @throws IOException 
+			 * @throws LineUnavailableException
+			 */
+			private void rawplay(AudioFormat targetFormat, AudioInputStream inputStream)
+					throws IOException, LineUnavailableException {
+				byte[] audioBuffer = new byte[4096];
+
+				SourceDataLine line = getLine(targetFormat);
+				if (line != null) {
+					int bytesRead = 0;
+					int bytesWritten = 0;
+
+					// Start audio output.
+					line.start();
+
+					while (bytesRead != -1) {
+						// Read audio buffer.
+						bytesRead = inputStream.read(audioBuffer, 0, audioBuffer.length);
+
+						// Only write out data if available.
+						if (bytesRead != -1) {
+							// Write to output.
+							bytesWritten = line.write(audioBuffer, 0, bytesRead);
+						}
+					}
+
+					// Stop and close output and stream.
+					line.drain();
+					line.stop();
+					line.close();
+					inputStream.close();
+				}
+			}
+
+			/**
+			 * Returns a audio line in the format specified.
+			 * @param audioFormat Format of the audio line.
+			 * @return The audio line.
+			 * @throws LineUnavailableException
+			 */
+			private SourceDataLine getLine(AudioFormat audioFormat) throws LineUnavailableException {
+				SourceDataLine res = null;
+				DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
+				res = (SourceDataLine) AudioSystem.getLine(info);
+				res.open(audioFormat);
+				return res;
+			}
 		}
 	}
 
@@ -203,7 +322,7 @@ public class SoundcloudPlayer {
 	 * @param resourceUri URI to the resource.
 	 * @return Resource as a JSON object.
 	 */
-	public JSONObject getResource(String resourceUri) throws Exception {
+	private JSONObject getResource(String resourceUri, boolean isArray) throws Exception {
 		JSONObject jsonResource = new JSONObject();
 
 		// Create API wrapper for Soundcloud.
@@ -223,16 +342,21 @@ public class SoundcloudPlayer {
 			HttpResponse response = wrapper.get(resource);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				// Resource found (Status: 200).
-				jsonResource = Http.getJSON(response);
+				if(isArray) {
+					// Soundcloud returns invalid JSON for arrays - so fix it!
+					jsonResource = new JSONObject(new JSONTokener("{\"array\":" + Http.getString(response) + "}"));
+				} else {
+					jsonResource = Http.getJSON(response);
+				}
 
-				// Debug.
-				//System.out.println(jsonResource.toString());
+				// Debug
+				System.out.println(Http.formatJSON(jsonResource.toString()));
 			} else if(response.getStatusLine().getStatusCode() == 302) {
 				// Resource found (Status: 302).
 				jsonResource = Http.getJSON(response);
 
 				// Debug.
-				//System.out.println(jsonResource.toString());
+				System.out.println(Http.formatJSON(jsonResource.toString()));
 			} else {
 				// Resource not found.
 				// Debug.
@@ -252,7 +376,7 @@ public class SoundcloudPlayer {
 	 * TODO: Remove this.
 	 * @param url
 	 */
-	public static synchronized void playSound(final String url) {
+	private static synchronized void playSound(final String url) {
 		new Thread(new Runnable() {
 			public void run() {
 				try {
