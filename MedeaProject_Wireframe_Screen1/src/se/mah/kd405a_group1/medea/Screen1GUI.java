@@ -46,8 +46,8 @@ public class Screen1GUI extends JFrame {
 	public Screen1GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = 400;// screenSize.getWidth();
-		double height = 400;// screenSize.getHeight();
+		double width = 1080;// screenSize.getWidth();
+		double height = 1920;// screenSize.getHeight();
 		System.out.println("JFrame Width: " + width + " Height: " + height);
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
@@ -59,13 +59,18 @@ public class Screen1GUI extends JFrame {
 		
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
+		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil.gif")));
-		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+		lblNewLabel.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("/Users/linnnerlund/Desktop/grupp1---programmering-2---projekt/MedeaProject/images/podcast.jpg"));
+		label.setBounds(0, 0, 1080, 1920);
+		contentPane.add(label);
 
 		// Test playback.
 		new SoundcloudPlayer("/users/medea-vox/tracks/249648982/");
