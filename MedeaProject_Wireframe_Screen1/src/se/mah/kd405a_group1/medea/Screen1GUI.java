@@ -59,7 +59,7 @@ public class Screen1GUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_2-01.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil.gif")));
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 	}
