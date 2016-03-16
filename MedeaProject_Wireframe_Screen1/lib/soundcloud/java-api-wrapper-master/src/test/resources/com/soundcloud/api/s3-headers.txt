@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+x-amz-id-2: 7WKzm/D/jJXIB52DBYCcs57p44C1W67H+zPP+D/UnETmZfcVtaswkvtyQegBoPY/
+x-amz-request-id: 39B41EBA20F893D8
+x-amz-meta-bitrate: 128
+x-amz-meta-duration: 18998
+x-amz-meta-job: Nbhil06qjDaP
+Last-Modified: Tue, 25 Oct 2011 10:01:23 GMT
+ETag: "81c4a04a366ab681ea068b2fa06d10a3"
+Accept-Ranges: bytes
+Content-Type: audio/mpeg
+Content-Length: 303855
+Server: AmazonS3
+Cache-Control: max-age=31535935
+Date: Tue, 25 Oct 2011 10:06:45 GMT
+Connection: keep-alive
