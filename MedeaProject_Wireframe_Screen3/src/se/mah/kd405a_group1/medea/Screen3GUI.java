@@ -57,10 +57,14 @@ public class Screen3GUI extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		JLabel lblNewLabel2 = new JLabel("");
+		lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
+		contentPane.add(lblNewLabel2);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_4-01.jpg")));
-		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
-		contentPane.add(lblNewLabel);
+		//JLabel lblNewLabel = new JLabel("");
+		//lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_4-01.jpg")));
+		//lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+		//contentPane.add(lblNewLabel);
 	}
 }
