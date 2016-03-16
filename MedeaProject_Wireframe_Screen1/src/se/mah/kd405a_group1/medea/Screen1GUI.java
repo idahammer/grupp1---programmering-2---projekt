@@ -5,12 +5,20 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -19,12 +27,19 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
-public class Screen1GUI extends JFrame {
+public class Screen1GUI extends JFrame  {
 
 	private JPanel contentPane;
+	
+	 
+	               
+	            
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -40,7 +55,9 @@ public class Screen1GUI extends JFrame {
 			}
 		});
 	}
-
+	
+	
+	 
 	/**
 	 * Create the frame.
 	 */
@@ -59,8 +76,26 @@ public class Screen1GUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil.gif")));
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
-	}
+		
+		JLabel lblWireframeicon = new JLabel("Wireframe_icon");
+		
+		lblWireframeicon.setBounds(476, 0, 1361, 1080);
+		contentPane.add(lblWireframeicon);
+		
+	
+	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+		@Override
+		public boolean dispatchKeyEvent(KeyEvent e) {
+			
+			lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_2-01.jpg")));
+			System.out.println("Got key event!");
+			return false;
+		}
+	});
 }
+}
+	
+
