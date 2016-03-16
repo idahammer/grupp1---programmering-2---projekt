@@ -53,10 +53,11 @@ public class Screen1GUI extends JFrame {
 		this.setUndecorated(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.PINK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane.setBorder(new LineBorder(new Color(0,0,0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
