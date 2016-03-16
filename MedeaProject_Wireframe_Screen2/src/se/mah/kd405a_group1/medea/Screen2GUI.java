@@ -60,8 +60,12 @@ public class Screen2GUI extends JFrame {
 		
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
+		lblNewLabel2.setBounds(6, 19, (int)width, (int)height);
 		contentPane.add(lblNewLabel2);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 1286, 800);
+		contentPane.add(lblNewLabel);
 		
 		//JLabel lblNewLabel = new JLabel("");
 		//lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_3-01.jpg")));
