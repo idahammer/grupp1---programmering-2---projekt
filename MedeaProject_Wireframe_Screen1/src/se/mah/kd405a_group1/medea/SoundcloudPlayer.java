@@ -407,39 +407,4 @@ public class SoundcloudPlayer {
 		
 		return jsonResource;
 	}
-
-	/**
-	 * NOT USED ANYMORE.
-	 * TODO: Remove this.
-	 * @param url
-	 */
-	private static synchronized void playSound(final String url) {
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					// Open audio stream.
-					BigClip clip = new BigClip(AudioSystem.getClip());
-					AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-							Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/" + url));
-					clip.open(inputStream);
-
-					// Enable looping.
-					clip.loop(Clip.LOOP_CONTINUOUSLY);
-
-					// Start clip.
-					clip.start();
-					while (true) {
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException iex) {
-							iex.printStackTrace();
-							return;
-						}
-					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		}).start();
-	}
 }
