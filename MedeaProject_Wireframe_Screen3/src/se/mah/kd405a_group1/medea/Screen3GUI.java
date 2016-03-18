@@ -51,8 +51,8 @@ public class Screen3GUI extends JFrame {
 	public Screen3GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = 1080;//screenSize.getWidth();
-		double height = 1920;//screenSize.getHeight();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
 		System.out.println("JFrame Width: "+width+" Height: "+height);
 		this.setBounds(0, 0, (int)width, (int)height); 
 		this.setUndecorated(true);
@@ -63,10 +63,10 @@ public class Screen3GUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		// Start screen pic
-		/*JLabel lblNewLabel2 = new JLabel("");
+		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
-		contentPane.add(lblNewLabel2);*/
+		contentPane.add(lblNewLabel2);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
