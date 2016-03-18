@@ -50,8 +50,8 @@ public class Screen3GUI extends JFrame {
 	public Screen3GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = 1080;//screenSize.getWidth();
-		double height = 1920;//screenSize.getHeight();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
 		System.out.println("JFrame Width: "+width+" Height: "+height);
 		this.setBounds(0, 0, (int)width, (int)height); 
 		this.setUndecorated(true);
