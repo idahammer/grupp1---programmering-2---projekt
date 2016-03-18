@@ -77,7 +77,7 @@ public class Screen1GUI extends JFrame  {
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-<<<<<<< HEAD
+
 
 
 		contentPane.setBackground(Color.BLACK);
@@ -95,10 +95,10 @@ public class Screen1GUI extends JFrame  {
 		contentPane.setBorder(new LineBorder(new Color(0,0,0)));
         
 
-=======
+
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
->>>>>>> origin/master
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -120,7 +120,7 @@ public class Screen1GUI extends JFrame  {
 		contentPane.add(lblWireframeicon);
 		
 	
-<<<<<<< HEAD
+
 	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 		@Override
 		public boolean dispatchKeyEvent(KeyEvent e) {
@@ -130,7 +130,7 @@ public class Screen1GUI extends JFrame  {
 			return false;
 		}
 	});
-=======
+
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
@@ -139,7 +139,7 @@ public class Screen1GUI extends JFrame  {
 				return false;
 			}
 		});
->>>>>>> origin/master
+
 
 
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
