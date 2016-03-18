@@ -78,7 +78,7 @@ public class Screen2GUI extends JFrame {
 				public boolean dispatchKeyEvent(KeyEvent e) {
 					
 		//picture after klick
-					lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MEDEA2FINALIHOPE.png"))); 
+					lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Medea2FinalScreen.png"))); 
 					System.out.println("Got key event!");
 					return false;
 				}
