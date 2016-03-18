@@ -77,28 +77,8 @@ public class Screen1GUI extends JFrame  {
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-
-
-
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-		contentPane.setBackground(Color.PINK);
-		contentPane.setBorder(new LineBorder(new Color(0,0,0)));
-        
-
-
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -113,6 +93,7 @@ public class Screen1GUI extends JFrame  {
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 		
+<<<<<<< HEAD
 		
 		
 		
@@ -129,6 +110,15 @@ public class Screen1GUI extends JFrame  {
 		}
 	});
 
+=======
+		JLabel lblWireframeicon = new JLabel("Wireframe_icon");
+		lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg")));
+		
+		lblWireframeicon.setBounds(0, 0, 1080, 1920);
+		contentPane.add(lblWireframeicon);
+		
+	
+>>>>>>> origin/master
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
@@ -137,8 +127,6 @@ public class Screen1GUI extends JFrame  {
 				return false;
 			}
 		});
-
-
 
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		lblNewLabel.setBounds(0, 0, 1080, 1920);
