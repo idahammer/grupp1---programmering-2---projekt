@@ -77,28 +77,8 @@ public class Screen1GUI extends JFrame  {
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-<<<<<<< HEAD
-
-
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-
-		contentPane.setBackground(Color.PINK);
-		contentPane.setBorder(new LineBorder(new Color(0,0,0)));
-        
-
-=======
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
->>>>>>> origin/master
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -114,23 +94,12 @@ public class Screen1GUI extends JFrame  {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblWireframeicon = new JLabel("Wireframe_icon");
-		lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_2-01.jpg")));
+		lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg")));
 		
-		lblWireframeicon.setBounds(476, 0, 1361, 1080);
+		lblWireframeicon.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblWireframeicon);
 		
 	
-<<<<<<< HEAD
-	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-		@Override
-		public boolean dispatchKeyEvent(KeyEvent e) {
-			
-			//lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-			System.out.println("Got key event!");
-			return false;
-		}
-	});
-=======
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
@@ -139,8 +108,6 @@ public class Screen1GUI extends JFrame  {
 				return false;
 			}
 		});
->>>>>>> origin/master
-
 
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		lblNewLabel.setBounds(0, 0, 1080, 1920);
