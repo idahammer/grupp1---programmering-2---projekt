@@ -9,7 +9,17 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+<<<<<<< HEAD
 import java.awt.event.KeyEvent;
+=======
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+>>>>>>> 7cdd8a61965df8221b31410bce22f9d58edd1be9
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -17,18 +27,38 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
 
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 
-public class Screen1GUI extends JFrame {
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import javax.swing.Icon;
+
+import javax.swing.ImageIcon;
+<<<<<<< HEAD
+import javax.swing.SwingConstants;
+=======
+import javax.swing.JButton;
+>>>>>>> 7cdd8a61965df8221b31410bce22f9d58edd1be9
+
+public class Screen1GUI extends JFrame  {
 
 	private JPanel contentPane;
+	
+	 
+	               
+	            
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -44,39 +74,63 @@ public class Screen1GUI extends JFrame {
 			}
 		});
 	}
-
+	
+	
+	 
 	/**
 	 * Create the frame.
 	 */
 	public Screen1GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = screenSize.getWidth();
-		double height = screenSize.getHeight();
+		double width = 1080;// screenSize.getWidth();
+		double height = 1920;// screenSize.getHeight();
 		System.out.println("JFrame Width: " + width + " Height: " + height);
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.PINK);
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		/*JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
-		contentPane.add(lblNewLabel2);*/
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil.gif")));
-		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
-		contentPane.add(lblNewLabel);
-
+		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
+		//lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
+		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblWireframeicon = new JLabel("Wireframe_icon");
+		lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_2-01.jpg")));
+		
+		lblWireframeicon.setBounds(476, 0, 1361, 1080);
+		contentPane.add(lblWireframeicon);
+		
+	
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
+				lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+				System.out.println("Got key event!");
+				return false;
+			}
+		});
+
+
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
+		lblNewLabel.setBounds(0, 0, 1080, 1920);
+		contentPane.add(lblNewLabel);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
+		label.setBounds(0, 0, 1080, 1920);
+		contentPane.add(label);
+
 		// Test soundcloud player.
 		SoundcloudPlayer soundcloudPlayer = new SoundcloudPlayer("medea-vox");
 		//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
@@ -86,38 +140,8 @@ public class Screen1GUI extends JFrame {
 		
 		// Play track.
 		track.play();
-		try {
-			// Fetch the audio waveform image.
-			lblNewLabel.setIcon(new ImageIcon(new URL(track.getWaveformURL())));
-			lblNewLabel2.setText("Time:" + (track.getCurrentPos() / 1000) + "/" + (track.getDuration() / 1000));
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				DecimalFormat decimalFormat = new DecimalFormat("00");
-				while(true) {
-					int c = track.getCurrentPos();
-					int sc = c / 1000;
-					int mc = (sc > 0) ? sc / 1000 : 0;
-					int hc = (mc > 0) ? mc / 60 : 0;
-					int d = track.getDuration();
-					int sd = d / 1000;
-					int md = (sd > 0) ? sd / 1000 : 0;
-					int hd = (md > 0) ? md / 60 : 0;
-					lblNewLabel2.setText("Time - " + ((hd > 0) ? decimalFormat.format(hc) : "") + ":" + decimalFormat.format(mc) +
-							":" + decimalFormat.format(sc) + "/" + ((hd > 0) ? decimalFormat.format(hd) : "") + ":" +
-							decimalFormat.format(md) + ":" + decimalFormat.format(sd));
-					try {
-						Thread.sleep(900);
-					} catch(InterruptedException ex) {
-						break;
-					}
-				}
-			}
-			
-		}).start();
 	}
+
 }
+	
+
