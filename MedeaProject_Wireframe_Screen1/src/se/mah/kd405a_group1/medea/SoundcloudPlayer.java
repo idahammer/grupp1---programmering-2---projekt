@@ -182,6 +182,22 @@ public class SoundcloudPlayer {
 		} 
 		
 		/**
+		 * Current play position in ms.
+		 * @return Current play position in ms
+		 */
+		public int getCurrentPos() {
+			return this.currentPos;
+		}
+
+		/**
+		 * Track duration in ms.
+		 * @return Track duration in ms.
+		 */
+		public int getDuration() {
+			return this.duration;
+		}
+
+		/**
 		 * Retries the URL of the stream from the track info.
 		 * @return A URL object of the stream.
 		 * @throws Exception
@@ -291,6 +307,10 @@ public class SoundcloudPlayer {
 							// Write to output.
 							bytesWritten = line.write(audioBuffer, 0, bytesRead);
 						}
+
+						// Update current playback position.
+						currentPos = (int)getMicrosecondPosition(line);
+						System.out.println("current pos: " + currentPos / 1000);
 					}
 
 					// Stop and close output and stream.
@@ -314,6 +334,20 @@ public class SoundcloudPlayer {
 				res.open(audioFormat);
 				return res;
 			}
+
+			int framePosition = 0;
+
+		    private long convertFramesToMilliseconds(SourceDataLine dataLine, int frames) {
+		        return (frames / (long) dataLine.getFormat().getSampleRate()) * 1000;
+		    }
+
+		    public long getMicrosecondPosition(SourceDataLine dataLine) {
+		    	return convertFramesToMilliseconds(dataLine, getFramePosition(dataLine));
+		    }
+
+		    public int getFramePosition(SourceDataLine dataLine) {
+				return framePosition + dataLine.getFramePosition();
+		    }
 		}
 	}
 
