@@ -93,7 +93,7 @@ public class Screen1GUI extends JFrame  {
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 		
-<<<<<<< HEAD
+
 		
 		
 		
@@ -104,21 +104,17 @@ public class Screen1GUI extends JFrame  {
 		@Override
 		public boolean dispatchKeyEvent(KeyEvent e) {
 			
-			lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart1.png"))); //byt till podcastbild
+			lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
 			System.out.println("Got key event!");
 			return false;
 		}
 	});
 
-=======
-		JLabel lblWireframeicon = new JLabel("Wireframe_icon");
-		lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg")));
+
 		
-		lblWireframeicon.setBounds(0, 0, 1080, 1920);
-		contentPane.add(lblWireframeicon);
 		
 	
->>>>>>> origin/master
+
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
