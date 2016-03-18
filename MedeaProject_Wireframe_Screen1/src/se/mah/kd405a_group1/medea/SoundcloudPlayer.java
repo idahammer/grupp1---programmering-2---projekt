@@ -60,11 +60,12 @@ public class SoundcloudPlayer {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
+		/*// Debug
 		System.out.println("Available tracks:");
 		for(Track track : this.tracks) {
 			System.out.println(track.title);
-		}
+		}*/
 	}
 
 	/**
@@ -310,7 +311,9 @@ public class SoundcloudPlayer {
 
 						// Update current playback position.
 						currentPos = (int)getMicrosecondPosition(line);
-						System.out.println("current pos: " + currentPos / 1000);
+						
+						/*// Debug
+						System.out.println("current pos: " + currentPos / 1000);*/
 					}
 
 					// Stop and close output and stream.
@@ -383,23 +386,23 @@ public class SoundcloudPlayer {
 					jsonResource = Http.getJSON(response);
 				}
 
-				// Debug
-				System.out.println(Http.formatJSON(jsonResource.toString()));
+				/*// Debug
+				System.out.println(Http.formatJSON(jsonResource.toString()));*/
 			} else if(response.getStatusLine().getStatusCode() == 302) {
 				// Resource found (Status: 302).
 				jsonResource = Http.getJSON(response);
 
-				// Debug.
-				System.out.println(Http.formatJSON(jsonResource.toString()));
+				/*// Debug.
+				System.out.println(Http.formatJSON(jsonResource.toString()));*/
 			} else {
 				// Resource not found.
 				// Debug.
 				System.err.println("Invalid status received: " + response.getStatusLine());
 			}
 		} finally {
-			// Debug.
+			/*// Debug.
 			// Serialize wrapper state again (token might have been refreshed).
-			System.out.println(wrapper.toString());
+			System.out.println(wrapper.toString());*/
 		}
 		
 		return jsonResource;
