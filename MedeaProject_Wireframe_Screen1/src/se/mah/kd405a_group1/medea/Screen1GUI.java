@@ -9,17 +9,12 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-<<<<<<< HEAD
-import java.awt.event.KeyEvent;
-=======
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
->>>>>>> 7cdd8a61965df8221b31410bce22f9d58edd1be9
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -44,21 +39,14 @@ import com.firebase.client.ValueEventListener;
 import javax.swing.Icon;
 
 import javax.swing.ImageIcon;
-<<<<<<< HEAD
+
 import javax.swing.SwingConstants;
-=======
 import javax.swing.JButton;
->>>>>>> 7cdd8a61965df8221b31410bce22f9d58edd1be9
 
 public class Screen1GUI extends JFrame  {
 
 	private JPanel contentPane;
-	
-	 
-	               
-	            
 
-	
 	/**
 	 * Launch the application.
 	 */
@@ -96,7 +84,7 @@ public class Screen1GUI extends JFrame  {
 		
 		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
-		//lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
