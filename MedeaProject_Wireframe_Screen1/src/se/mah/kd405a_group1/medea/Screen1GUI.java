@@ -13,7 +13,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.io.BufferedInputStream;
@@ -21,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 
 import javax.swing.JFrame;
@@ -39,17 +39,14 @@ import com.firebase.client.ValueEventListener;
 import javax.swing.Icon;
 
 import javax.swing.ImageIcon;
+
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 public class Screen1GUI extends JFrame  {
 
 	private JPanel contentPane;
-	
-	 
-	               
-	            
 
-	
 	/**
 	 * Launch the application.
 	 */
@@ -80,6 +77,7 @@ public class Screen1GUI extends JFrame  {
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
 		contentPane = new JPanel();
+<<<<<<< HEAD
 
 
 		contentPane.setBackground(Color.BLACK);
@@ -97,17 +95,20 @@ public class Screen1GUI extends JFrame  {
 		contentPane.setBorder(new LineBorder(new Color(0,0,0)));
         
 
+=======
+		contentPane.setBackground(Color.BLACK);
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+>>>>>>> origin/master
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		//lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
 		JLabel lblNewLabel = new JLabel("");
-
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
@@ -119,6 +120,7 @@ public class Screen1GUI extends JFrame  {
 		contentPane.add(lblWireframeicon);
 		
 	
+<<<<<<< HEAD
 	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 		@Override
 		public boolean dispatchKeyEvent(KeyEvent e) {
@@ -128,6 +130,16 @@ public class Screen1GUI extends JFrame  {
 			return false;
 		}
 	});
+=======
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
+				lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+				System.out.println("Got key event!");
+				return false;
+			}
+		});
+>>>>>>> origin/master
 
 
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
@@ -139,8 +151,15 @@ public class Screen1GUI extends JFrame  {
 		label.setBounds(0, 0, 1080, 1920);
 		contentPane.add(label);
 
-		// Test playback.
-		new SoundcloudPlayer("/users/medea-vox/tracks/249648982/");
+		// Test soundcloud player.
+		SoundcloudPlayer soundcloudPlayer = new SoundcloudPlayer("medea-vox");
+		//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
+		
+		// Get a track.
+		SoundcloudPlayer.Track track = soundcloudPlayer.getTrack(1);
+		
+		// Play track.
+		track.play();
 	}
 
 }
