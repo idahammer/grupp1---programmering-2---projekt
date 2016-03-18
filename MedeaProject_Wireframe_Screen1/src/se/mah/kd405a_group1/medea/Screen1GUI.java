@@ -84,7 +84,7 @@ public class Screen1GUI extends JFrame  {
 		
 		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
-		//lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart1.png")));
 		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
@@ -93,17 +93,32 @@ public class Screen1GUI extends JFrame  {
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblWireframeicon = new JLabel("Wireframe_icon");
-		lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg")));
+
 		
-		lblWireframeicon.setBounds(0, 0, 1080, 1920);
-		contentPane.add(lblWireframeicon);
+		
+		
 		
 	
+
+	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+		@Override
+		public boolean dispatchKeyEvent(KeyEvent e) {
+			
+			lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
+			System.out.println("Got key event!");
+			return false;
+		}
+	});
+
+
+		
+		
+	
+
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
-				lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+				lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("null")));
 				System.out.println("Got key event!");
 				return false;
 			}
