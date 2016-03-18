@@ -13,6 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import javax.swing.ImageIcon;
 
 public class ScreenGUI extends JFrame {
@@ -63,5 +69,27 @@ public class ScreenGUI extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(ScreenGUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea_logo.jpg")));
 		lblNewLabel.setBounds(50, 50, 210, 259);
 		contentPane.add(lblNewLabel);
+		
+		// Firebase test connection.
+		Firebase fbRef = new Firebase("https://docs-examples.firebaseio.com/web/data");
+		
+		// Read value from firebase.
+		fbRef.addValueEventListener(new ValueEventListener() {
+			/**
+			 * Called when data is changed.
+			 */
+		    @Override
+		    public void onDataChange(DataSnapshot snapshot) {
+		        System.out.println(snapshot.getValue());
+		    }
+		    
+		    /**
+		     * Called when canceling.
+		     */
+		    @Override
+		    public void onCancelled(FirebaseError firebaseError) {
+		        System.out.println("The read failed: " + firebaseError.getMessage());
+		    }
+		});
 	}
 }
