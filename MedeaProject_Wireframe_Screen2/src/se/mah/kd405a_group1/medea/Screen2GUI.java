@@ -5,8 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -58,14 +61,39 @@ public class Screen2GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MEDEA2FINALIHOPE.png")));
-		lblNewLabel2.setBounds(6, 19, (int)width, (int)height);
-		contentPane.add(lblNewLabel2);
+		// Start screen pic
+				JLabel lblNewLabel2 = new JLabel("");
+				lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart1.png")));
+				lblNewLabel2.setBounds(0, 0, 1080, 1920);
+				contentPane.add(lblNewLabel2);
+				
+				JLabel lblNewLabel = new JLabel("");
+				lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
+				lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+				contentPane.add(lblNewLabel);
+			
+			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+				@Override
+				public boolean dispatchKeyEvent(KeyEvent e) {
+					
+					lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MEDEA2FINALIHOPE.png"))); //byt till 2bild
+					System.out.println("Got key event!");
+					return false;
+				}
+			});
+
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+					@Override
+					public boolean dispatchKeyEvent(KeyEvent e) {
+						lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("null")));
+						System.out.println("Got key event!");
+						return false;
+					}
+				});
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(34, 19, 280, 244);
-		contentPane.add(lblNewLabel);
+		
+		
+		
 		
 		//JLabel lblNewLabel = new JLabel("");
 		//lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_3-01.jpg")));
