@@ -246,7 +246,7 @@ public class SoundcloudPlayer {
 						// Open audio stream.
 						MpegAudioFileReader mpgFileReader = new MpegAudioFileReader();
 						InputStream is = getURL().openStream();
-						AudioInputStream inputStream = mpgFileReader.getAudioInputStream(new BufferedInputStream(is));
+						AudioInputStream inputStream = mpgFileReader.getAudioInputStream(new BufferedInputStream(is, 4 * 1024));
 
 						// Setup format.
 						AudioFormat baseFormat = inputStream.getFormat();

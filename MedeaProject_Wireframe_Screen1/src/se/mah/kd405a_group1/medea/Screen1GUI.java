@@ -46,6 +46,8 @@ import javax.swing.JButton;
 public class Screen1GUI extends JFrame  {
 
 	private JPanel contentPane;
+	
+	boolean firstTimePlayAudio = true;
 
 	/**
 	 * Launch the application.
@@ -92,56 +94,36 @@ public class Screen1GUI extends JFrame  {
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
-		
 
-		
-		
-		
-		
-	
-
-	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-		@Override
-		public boolean dispatchKeyEvent(KeyEvent e) {
-			
-			lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
-			System.out.println("Got key event!");
-			return false;
-		}
-	});
-
-
-		
-		
-	
-
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-			@Override
-			public boolean dispatchKeyEvent(KeyEvent e) {
-				lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("null")));
-				System.out.println("Got key event!");
-				return false;
-			}
-		});
-
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
-		lblNewLabel.setBounds(0, 0, 1080, 1920);
-		contentPane.add(lblNewLabel);
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		label.setBounds(0, 0, 1080, 1920);
 		contentPane.add(label);
 
-		// Test soundcloud player.
+		// Create soundcloud player.
 		SoundcloudPlayer soundcloudPlayer = new SoundcloudPlayer("medea-vox");
 		//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
-		
-		// Get a track.
-		SoundcloudPlayer.Track track = soundcloudPlayer.getTrack(1);
-		
-		// Play track.
-		track.play();
+
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
+				lblNewLabel.setIcon(null);
+				lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
+				
+				// Play track.
+				if(firstTimePlayAudio) {
+					// Get a track.
+					SoundcloudPlayer.Track track = soundcloudPlayer.getTrack(1);
+					
+					// Play track.
+					track.play();
+					
+					firstTimePlayAudio = false;
+				}
+				System.out.println("Got key event!");
+				return false;
+			}
+		});
 	}
 
 }
