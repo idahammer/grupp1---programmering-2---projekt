@@ -81,6 +81,11 @@ public class Screen1GUI extends JFrame  {
 		this.setUndecorated(true);
 		contentPane = new JPanel();
 
+
+		contentPane.setBackground(Color.BLACK);
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+
+
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 
@@ -97,7 +102,7 @@ public class Screen1GUI extends JFrame  {
 		
 		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
-		//lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
