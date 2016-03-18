@@ -80,10 +80,10 @@ public class Screen1GUI extends JFrame  {
 		this.setBounds(0, 0, (int) width, (int) height);
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-<<<<<<< HEAD
+
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-=======
+
 
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -91,7 +91,7 @@ public class Screen1GUI extends JFrame  {
 		contentPane.setBackground(Color.PINK);
 		contentPane.setBorder(new LineBorder(new Color(0,0,0)));
         
->>>>>>> origin/master
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -118,7 +118,7 @@ public class Screen1GUI extends JFrame  {
 		@Override
 		public boolean dispatchKeyEvent(KeyEvent e) {
 			
-			lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+			//lblWireframeicon.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 			System.out.println("Got key event!");
 			return false;
 		}
