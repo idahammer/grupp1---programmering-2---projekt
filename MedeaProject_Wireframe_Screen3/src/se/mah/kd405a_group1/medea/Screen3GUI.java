@@ -81,7 +81,7 @@ public class Screen3GUI extends JFrame {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
 				
-				//lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Medea3jpg.jpg"))); //byt till bild
+				lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaScreen3Final.png"))); //byt till bild
 				lblNewLabel.setIcon(null); // tar bort pilen
 				System.out.println("Got key event!");
 				return false;
