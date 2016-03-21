@@ -97,7 +97,7 @@ public class Screen3GUI extends JFrame {
 	private void activateScreen() {
 		//picture after klick
 		lblNewLabel.setIcon(null);
-		lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Medea3FINALYES.png")));
+		lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaScreen3.png")));
 	}
 	
 	/**
