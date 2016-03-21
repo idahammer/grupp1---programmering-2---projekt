@@ -3,6 +3,7 @@ package se.mah.kd405a_group1.medea;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+
 public class Imgthred1 extends Thread {
 
 }
