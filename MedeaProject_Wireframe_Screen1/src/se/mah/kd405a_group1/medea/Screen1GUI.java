@@ -120,7 +120,7 @@ public class Screen1GUI extends JFrame  {
 	 */
 	private void activateScreen() {
 		lblNewLabel.setIcon(null);
-		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
+		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/slideshow.gif"))); //byt till podcastbild
 		
 		// Play track.
 		if(firstTimePlayAudio) {
