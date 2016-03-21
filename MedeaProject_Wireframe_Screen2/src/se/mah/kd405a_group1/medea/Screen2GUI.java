@@ -1,3 +1,5 @@
+//SCREEN 2
+
 package se.mah.kd405a_group1.medea;
 
 import java.awt.BorderLayout;
@@ -48,6 +50,7 @@ public class Screen2GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public Screen2GUI() {
+		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = screenSize.getWidth();
@@ -56,21 +59,21 @@ public class Screen2GUI extends JFrame {
 		this.setBounds(0, 0, (int)width, (int)height); 
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.PINK);
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 				
 				JLabel lblNewLabel = new JLabel("");
-				lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
-				lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+				lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
+				lblNewLabel.setBounds(260, 280, (int)width, (int)height);
 				contentPane.add(lblNewLabel);
 		
 
 		// Start screen pic
 				JLabel lblNewLabel2 = new JLabel("");
 				lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-				lblNewLabel2.setBounds(0, 0, 1080, 1920);
+				lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
 				contentPane.add(lblNewLabel2);
 			
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
@@ -78,36 +81,22 @@ public class Screen2GUI extends JFrame {
 				public boolean dispatchKeyEvent(KeyEvent e) {
 					
 		//picture after klick
-					lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Medea2FinalScreen.png"))); 
+					lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea2whatDOweDO.png"))); 
 					System.out.println("Got key event!");
 					return false;
 				}
 			});
 
+			//kollar om någon trycker på en key på tangentbordet
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 					@Override
 					public boolean dispatchKeyEvent(KeyEvent e) {
-						lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("null")));
+						lblNewLabel.setIcon(null);
 						System.out.println("Got key event!");
 						return false;
 					}
 				});
 		
 		
-		
-
-		//JLabel lblNewLabel2 = new JLabel("");
-		//lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea2jpg.jpg")));
-		//lblNewLabel2.setBounds(6, 19, (int)width, (int)height);
-		//contentPane.add(lblNewLabel2);
-		
-		
-
-		
-		
-		//JLabel lblNewLabel = new JLabel("");
-		//lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_3-01.jpg")));
-		//lblNewLabel.setBounds(0, 0, (int)width, (int)height);
-		//contentPane.add(lblNewLabel);
 	}
 }

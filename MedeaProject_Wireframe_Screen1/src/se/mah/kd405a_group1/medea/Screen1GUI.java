@@ -1,3 +1,5 @@
+//SCREEN 1
+
 package se.mah.kd405a_group1.medea;
 
 import java.awt.BorderLayout;
@@ -76,6 +78,7 @@ public class Screen1GUI extends JFrame  {
 	 * Create the frame.
 	 */
 	public Screen1GUI() {
+		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = 1080;// screenSize.getWidth();
@@ -89,22 +92,19 @@ public class Screen1GUI extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//arrow gif
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
+		lblNewLabel.setBounds(260, 280, (int)width, (int)height);
+		contentPane.add(lblNewLabel);
+
+		
 		// Start screen pic
 		lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-		lblNewLabel2.setBounds(0, 0, 1080, 1920);
+		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel2);
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
-		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
-		contentPane.add(lblNewLabel);
-
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
-		label.setBounds(0, 0, 1080, 1920);
-		contentPane.add(label);
-
 		// Main.
 		new Thread(new Runnable() {
 			@Override
