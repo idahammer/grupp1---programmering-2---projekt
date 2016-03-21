@@ -138,22 +138,27 @@ public class Screen1GUI extends JFrame  {
 	 * Called when screen is activated.
 	 */
 	private void activateScreen() {
-		lblNewLabel.setIcon(null);
-		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/slideshow.gif"))); //byt till podcastbild
-		
-		// Play track.
-		if(firstTimePlayAudio) {
-			// Create soundcloud player.
-			soundcloudPlayer = new SoundcloudPlayer("medea-vox");
-			//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
-
-			// Get a track.
-			soundcloudTrack = soundcloudPlayer.getTrack(1);
+		try {
+			lblNewLabel.setIcon(null);
+			lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/slideshow.gif"))); //byt till podcastbild
 			
 			// Play track.
-			soundcloudTrack.play();
+			if(firstTimePlayAudio) {
+				// Create soundcloud player.
+				soundcloudPlayer = new SoundcloudPlayer("medea-vox");
+				//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
+	
+				// Get a track.
+				soundcloudTrack = soundcloudPlayer.getTrack(1);
+				
+				// Play track.
+				soundcloudTrack.play();
+				
+				firstTimePlayAudio = false;
+			}
+		} catch(Exception ex) {
+			onError(ex.getMessage());
 			
-			firstTimePlayAudio = false;
 		}
 	}
 	
@@ -175,6 +180,7 @@ public class Screen1GUI extends JFrame  {
 	}
 	
 	private void connectFirebase(String screenName) {
+		try {
 		// Connect to Firebase.
 		Firebase fbRef = new Firebase("https://kd401ag1.firebaseio.com/");
 		fbRef.authAnonymously(new AuthResultHandler() {
@@ -210,6 +216,10 @@ public class Screen1GUI extends JFrame  {
 				});
 			}
 		});
+		} catch(Exception ex) {
+			onError(ex.getMessage());
+			
+		}
 	}
 }
 	
