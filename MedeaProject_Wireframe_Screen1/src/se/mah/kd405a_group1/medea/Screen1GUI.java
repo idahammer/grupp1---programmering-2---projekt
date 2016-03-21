@@ -87,21 +87,19 @@ public class Screen1GUI extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
+		lblNewLabel.setBounds(500, 100, (int)width, (int)height);
+		contentPane.add(lblNewLabel);
+
+		
 		// Start screen pic
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-		lblNewLabel.setBounds(500, 900, (int)width, (int)height);
-		contentPane.add(lblNewLabel);
-
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-		label.setBounds(500, 900, 1080, 1920);
-		contentPane.add(label);
+		
 
 		// Create soundcloud player.
 		SoundcloudPlayer soundcloudPlayer = new SoundcloudPlayer("medea-vox");
@@ -111,7 +109,6 @@ public class Screen1GUI extends JFrame  {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
 				lblNewLabel.setIcon(null);
-				label.setIcon(null);
 				lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
 				
 				// Play track.
