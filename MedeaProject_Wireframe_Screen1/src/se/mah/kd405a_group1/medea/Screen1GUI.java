@@ -111,6 +111,7 @@ public class Screen1GUI extends JFrame  {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
 				lblNewLabel.setIcon(null);
+				label.setIcon(null);
 				lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
 				
 				// Play track.
