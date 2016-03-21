@@ -82,7 +82,7 @@ public class Screen3GUI extends JFrame {
 			public boolean dispatchKeyEvent(KeyEvent e) {
 				
 				//picture after klick
-				lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Media3FINALYES.png"))); //byt till bild
+				lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Medea3FINALYES.png"))); //byt till bild
 				lblNewLabel.setIcon(null); // tar bort pilen
 				System.out.println("Got key event!");
 				return false;
