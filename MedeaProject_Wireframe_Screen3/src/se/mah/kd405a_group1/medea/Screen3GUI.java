@@ -88,11 +88,6 @@ public class Screen3GUI extends JFrame {
 				return false;
 			}
 		});
-
-		//JLabel lblNewLabel = new JLabel("New label");
-		//lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/Medea3jpg.jpg")));
-		//lblNewLabel.setBounds(0, 0, 1291, 800);
-		//contentPane.add(lblNewLabel);
 		
 	
 	}

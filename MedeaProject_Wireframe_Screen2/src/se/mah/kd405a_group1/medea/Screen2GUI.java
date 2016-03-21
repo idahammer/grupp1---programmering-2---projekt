@@ -95,20 +95,5 @@ public class Screen2GUI extends JFrame {
 				});
 		
 		
-		
-
-		//JLabel lblNewLabel2 = new JLabel("");
-		//lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea2jpg.jpg")));
-		//lblNewLabel2.setBounds(6, 19, (int)width, (int)height);
-		//contentPane.add(lblNewLabel2);
-		
-		
-
-		
-		
-		//JLabel lblNewLabel = new JLabel("");
-		//lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/wr_3-01.jpg")));
-		//lblNewLabel.setBounds(0, 0, (int)width, (int)height);
-		//contentPane.add(lblNewLabel);
 	}
 }
