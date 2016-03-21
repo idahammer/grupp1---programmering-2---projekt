@@ -71,6 +71,7 @@ public class Screen1GUI extends JFrame  {
 	 * Create the frame.
 	 */
 	public Screen1GUI() {
+		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = 1080;// screenSize.getWidth();

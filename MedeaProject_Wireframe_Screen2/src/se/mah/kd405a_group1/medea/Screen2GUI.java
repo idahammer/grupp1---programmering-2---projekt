@@ -48,6 +48,7 @@ public class Screen2GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public Screen2GUI() {
+		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = screenSize.getWidth();

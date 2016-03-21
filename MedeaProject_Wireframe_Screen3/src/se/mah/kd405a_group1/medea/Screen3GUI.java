@@ -49,6 +49,7 @@ public class Screen3GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public Screen3GUI() {
+		setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = screenSize.getWidth();
