@@ -72,7 +72,7 @@ public class Screen3GUI extends JFrame {
 		contentPane.add(lblNewLabel2);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz.gif")));
+		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
 		int iconW = lblNewLabel.getIcon().getIconWidth();
 		int iconH = lblNewLabel.getIcon().getIconHeight();
 		int iconX = ((int)width / 2) - (iconW / 2);
