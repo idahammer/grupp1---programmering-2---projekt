@@ -127,7 +127,13 @@ public class SoundcloudPlayer {
 		private int currentPos;
 		
 		/** Track duration in ms */
-		private int duration; 
+		private int duration;
+		
+		/** If the playback should continue or not */
+		private boolean doPlay;
+		
+		/** Playback thread */
+		private PlaybackThread playbackThread;
 		
 		/**
 		 * Track constructor.
@@ -141,6 +147,7 @@ public class SoundcloudPlayer {
 			this.waveformUrl = jsonTrack.getString("waveform_url");
 			this.currentPos = 0;
 			this.duration = jsonTrack.getInt("duration");
+			this.doPlay = false;
 
 			// Get artwork URL.
 			if(!jsonTrack.isNull("artwork_url")) {
@@ -220,7 +227,29 @@ public class SoundcloudPlayer {
 		 * @param url URL to track that should be played.
 		 */
 		public void play() {
-			new PlaybackThread().start();
+			// Just to be safe.
+			stop();
+
+			this.doPlay = true;
+			playbackThread = new PlaybackThread();
+			playbackThread.start();
+			System.out.println("started");
+		}
+
+		/**
+		 * Stop playback of track.
+		 */
+		public void stop() {
+			this.doPlay = false;
+			if(playbackThread != null) {
+				try {
+					playbackThread.join();
+					System.out.println("stopped");;
+				} catch(Exception ex) {
+					
+				}
+			}
+			playbackThread = null;
 		}
 		
 		/**
@@ -234,7 +263,7 @@ public class SoundcloudPlayer {
 			public void run() {
 				try {
 					// Ugly way of looping audio.
-					while (true) {
+					while (doPlay) {
 						/*
 						// Open audio stream.
 						InputStream inputStream = url.openStream();
@@ -311,6 +340,10 @@ public class SoundcloudPlayer {
 
 						// Update current playback position.
 						currentPos = (int)getMicrosecondPosition(line);
+						
+						if(!doPlay) {
+							return;
+						}
 						
 						/*// Debug
 						System.out.println("current pos: " + currentPos / 1000);*/

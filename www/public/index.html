@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Qr-test</title>
+    <link rel="stylesheet" href="style.css">
+   </head>
+  <body>
+    <section>
+      <p id="screens"><h2>Screen controller<h2></p>
+      <button type="button" id="medea1">medea1</button>
+      <button type="button" id="medea2">medea2</button>
+      <button type="button" id="medea3">medea3</button>
+      <p id="result"></p>
+      <p id="status"></p>
+    </section>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+    <script>
+// Handels authentication for anonoymous users.
+function authHandlerAno(error, authData) {
+  if(authData) {
+    // Get screens.
+    var fbScreensRef = document.fbRef.child("screens");
+
+    // Read current state of screens.
+    fbScreensRef.on("value", function(snapshot) {
+      // Update button status depending on if screen is active or not.
+      snapshot.forEach(function(obj) {
+        // Read state.
+        if(obj.val() == "inactive") {
+          $("#" + obj.key()).css("background-color", "red");
+        } else {
+          $("#" + obj.key()).css("background-color", "green");
+        }
+
+        // Connect buttons to firebase.
+        $("#" + obj.key()).unbind("click");
+        $("#" + obj.key()).bind("click", function() {
+          fbScreensRef.child(obj.key()).set(obj.val() == "inactive" ? "active" : "inactive");
+        });
+      });
+    }, function(error) {
+      console.log("The read failed: " + error.code);
+    });
+
+    // Called when screen state changes.
+    fbScreensRef.on("child_changed", function(snapshot) {
+      console.log("changed:" + snapshot.val());
+    }, function(error) {
+      console.log("The read failed: " + error.code);
+    });
+  } else {
+      console.log("Auth failed");
+  }
+}
+
+$(document).ready(function() {
+  // Connect to firebase.
+  document.fbRef = new Firebase("https://kd401ag1.firebaseio.com");
+  document.fbRef.authAnonymously(authHandlerAno);
+});
+    </script>
+  </body>
+</html>
+

@@ -30,11 +30,12 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-
+import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.Firebase.AuthResultHandler;
 
 import javax.swing.Icon;
 
@@ -46,6 +47,10 @@ import javax.swing.JButton;
 public class Screen1GUI extends JFrame  {
 
 	private JPanel contentPane;
+	JLabel lblNewLabel;
+	JLabel lblNewLabel2;
+	SoundcloudPlayer soundcloudPlayer;
+	SoundcloudPlayer.Track soundcloudTrack;
 	
 	boolean firstTimePlayAudio = true;
 
@@ -85,12 +90,12 @@ public class Screen1GUI extends JFrame  {
 		contentPane.setLayout(null);
 		
 		// Start screen pic
-		JLabel lblNewLabel2 = new JLabel("");
+		lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		lblNewLabel2.setBounds(0, 0, 1080, 1920);
 		contentPane.add(lblNewLabel2);
 		
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/pil2.gif")));
 		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
@@ -100,32 +105,93 @@ public class Screen1GUI extends JFrame  {
 		label.setBounds(0, 0, 1080, 1920);
 		contentPane.add(label);
 
-		// Create soundcloud player.
-		SoundcloudPlayer soundcloudPlayer = new SoundcloudPlayer("medea-vox");
-		//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
-
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+		// Main.
+		new Thread(new Runnable() {
 			@Override
-			public boolean dispatchKeyEvent(KeyEvent e) {
-				lblNewLabel.setIcon(null);
-				lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
-				
-				// Play track.
-				if(firstTimePlayAudio) {
-					// Get a track.
-					SoundcloudPlayer.Track track = soundcloudPlayer.getTrack(1);
-					
-					// Play track.
-					track.play();
-					
-					firstTimePlayAudio = false;
-				}
-				System.out.println("Got key event!");
-				return false;
+			public void run() {
+				// Connect to firebase.
+				connectFirebase("medea1");
+			}
+		}).start();
+	}
+
+	/**
+	 * Called when screen is activated.
+	 */
+	private void activateScreen() {
+		lblNewLabel.setIcon(null);
+		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/podcast.jpg"))); //byt till podcastbild
+		
+		// Play track.
+		if(firstTimePlayAudio) {
+			// Create soundcloud player.
+			soundcloudPlayer = new SoundcloudPlayer("medea-vox");
+			//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
+
+			// Get a track.
+			soundcloudTrack = soundcloudPlayer.getTrack(1);
+			
+			// Play track.
+			soundcloudTrack.play();
+			
+			firstTimePlayAudio = false;
+		}
+	}
+	
+	/**
+	 * Called when screen is deactivated.
+	 */
+	private void deactivateScreen() {
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setIcon(null);
+		
+		// Stop playback.
+		if(soundcloudTrack != null) {
+			soundcloudTrack.stop();
+		}
+		soundcloudTrack = null;
+		soundcloudPlayer = null;
+		
+		firstTimePlayAudio = true;
+	}
+	
+	private void connectFirebase(String screenName) {
+		// Connect to Firebase.
+		Firebase fbRef = new Firebase("https://kd401ag1.firebaseio.com/");
+		fbRef.authAnonymously(new AuthResultHandler() {
+			
+			@Override
+			public void onAuthenticationError(FirebaseError error) {
+			    System.out.println("Login Failed! " + error.toString());
+			}
+			
+			@Override
+			public void onAuthenticated(AuthData authData) {
+			    // Read value from firebase.
+				fbRef.child("screens").addValueEventListener(new ValueEventListener() {
+					/**
+					 * Called when data is changed.
+					 */
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+				        if(snapshot.child(screenName).getValue(String.class).equals("active")) {
+				        	activateScreen();
+				        } else {
+				        	deactivateScreen();
+				        }
+				    }
+				    
+				    /**
+				     * Called when canceling.
+				     */
+				    @Override
+				    public void onCancelled(FirebaseError firebaseError) {
+				        System.out.println("The read failed: " + firebaseError.getMessage());
+				    }
+				});
 			}
 		});
 	}
-
 }
 	
 
