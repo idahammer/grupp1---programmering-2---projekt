@@ -116,7 +116,7 @@ public class Screen1GUI extends JFrame  {
 				// Play track.
 				if(firstTimePlayAudio) {
 					// Get a track.
-					SoundcloudPlayer.Track track = soundcloudPlayer.getTrack(1);
+					SoundcloudPlayer.Track track = soundcloudPlayer.getTrack(0);
 					
 					// Play track.
 					track.play();
