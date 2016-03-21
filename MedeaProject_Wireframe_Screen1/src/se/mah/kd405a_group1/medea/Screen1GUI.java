@@ -95,12 +95,12 @@ public class Screen1GUI extends JFrame  {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-		lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+		lblNewLabel.setBounds(500, 900, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-		label.setBounds(0, 0, 1080, 1920);
+		label.setBounds(500, 900, 1080, 1920);
 		contentPane.add(label);
 
 		// Create soundcloud player.

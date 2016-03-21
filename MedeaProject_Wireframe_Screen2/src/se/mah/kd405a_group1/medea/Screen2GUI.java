@@ -66,7 +66,7 @@ public class Screen2GUI extends JFrame {
 				
 				JLabel lblNewLabel = new JLabel("");
 				lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-				lblNewLabel.setBounds(0, 0, (int)width, (int)height);
+				lblNewLabel.setBounds(500, 900, (int)width, (int)height);
 				contentPane.add(lblNewLabel);
 		
 
@@ -90,7 +90,7 @@ public class Screen2GUI extends JFrame {
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 					@Override
 					public boolean dispatchKeyEvent(KeyEvent e) {
-						lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("null")));
+						lblNewLabel.setIcon(null);
 						System.out.println("Got key event!");
 						return false;
 					}
