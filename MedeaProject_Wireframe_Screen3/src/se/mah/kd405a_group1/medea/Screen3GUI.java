@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -34,6 +35,7 @@ public class Screen3GUI extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel2;
+	private JLabel lblStatus;
 
 	/**
 	 * Launch the application.
@@ -69,6 +71,16 @@ public class Screen3GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		// Debug error label.
+		lblStatus = new JLabel("STATUS");
+		lblStatus.setVisible(false);
+		lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStatus.setOpaque(true);
+		lblStatus.setBackground(Color.GRAY);
+		lblStatus.setForeground(Color.BLACK);
+		lblStatus.setBounds(0, 0, (int)width, 300);
+		contentPane.add(lblStatus);
+
 		//gif
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
@@ -91,6 +103,14 @@ public class Screen3GUI extends JFrame {
 		}).start();
 	}
 
+	/** Draw error message on screen */
+	private void onError(String error) {
+		System.out.println(error);
+		lblStatus.setVisible(true);
+		lblStatus.setText(error);
+		
+	}
+
 	/**
 	 * Called when screen is activated.
 	 */
@@ -104,8 +124,8 @@ public class Screen3GUI extends JFrame {
 	 * Called when screen is deactivated.
 	 */
 	private void deactivateScreen() {
-		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-		lblNewLabel2.setIcon(null);
+		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
+		lblNewLabel2.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 	}
 	
 	private void connectFirebase(String screenName) {

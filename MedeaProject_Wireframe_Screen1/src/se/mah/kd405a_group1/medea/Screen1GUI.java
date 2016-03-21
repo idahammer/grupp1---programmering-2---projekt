@@ -51,6 +51,7 @@ public class Screen1GUI extends JFrame  {
 	private JPanel contentPane;
 	JLabel lblNewLabel;
 	JLabel lblNewLabel2;
+	JLabel lblStatus;
 	SoundcloudPlayer soundcloudPlayer;
 	SoundcloudPlayer.Track soundcloudTrack;
 	
@@ -92,8 +93,18 @@ public class Screen1GUI extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		// Debug error label.
+		lblStatus = new JLabel("STATUS");
+		lblStatus.setVisible(false);
+		lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStatus.setOpaque(true);
+		lblStatus.setBackground(Color.GRAY);
+		lblStatus.setForeground(Color.BLACK);
+		lblStatus.setBounds(0, 0, (int)width, 300);
+		contentPane.add(lblStatus);
+
 		//arrow gif
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
 		lblNewLabel.setBounds(260, 280, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
@@ -113,6 +124,14 @@ public class Screen1GUI extends JFrame  {
 				connectFirebase("medea1");
 			}
 		}).start();
+	}
+
+	/** Draw error message on screen */
+	private void onError(String error) {
+		System.out.println(error);
+		lblStatus.setVisible(true);
+		lblStatus.setText(error);
+		
 	}
 
 	/**
@@ -142,8 +161,8 @@ public class Screen1GUI extends JFrame  {
 	 * Called when screen is deactivated.
 	 */
 	private void deactivateScreen() {
-		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-		lblNewLabel2.setIcon(null);
+		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
+		lblNewLabel2.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
 		
 		// Stop playback.
 		if(soundcloudTrack != null) {
@@ -162,7 +181,7 @@ public class Screen1GUI extends JFrame  {
 			
 			@Override
 			public void onAuthenticationError(FirebaseError error) {
-			    System.out.println("Login Failed! " + error.toString());
+				onError("Login Failed! " + error.toString());
 			}
 			
 			@Override
@@ -186,7 +205,7 @@ public class Screen1GUI extends JFrame  {
 				     */
 				    @Override
 				    public void onCancelled(FirebaseError firebaseError) {
-				        System.out.println("The read failed: " + firebaseError.getMessage());
+						onError("The read failed: " + firebaseError.getMessage());
 				    }
 				});
 			}
