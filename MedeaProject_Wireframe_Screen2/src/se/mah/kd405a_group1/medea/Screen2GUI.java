@@ -19,16 +19,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.Firebase.AuthResultHandler;
 
 import javax.swing.ImageIcon;
 
 public class Screen2GUI extends JFrame {
 
 	private JPanel contentPane;
+	JLabel lblNewLabel;
+	JLabel lblNewLabel2;
 
 	/**
 	 * Launch the application.
@@ -64,39 +68,80 @@ public class Screen2GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 				
-				JLabel lblNewLabel = new JLabel("");
-				lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-				lblNewLabel.setBounds(260, 280, (int)width, (int)height);
-				contentPane.add(lblNewLabel);
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
+		lblNewLabel.setBounds(260, 280, (int)width, (int)height);
+		contentPane.add(lblNewLabel);
 		
 
 		// Start screen pic
-				JLabel lblNewLabel2 = new JLabel("");
-				lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-				lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
-				contentPane.add(lblNewLabel2);
-			
-			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-				@Override
-				public boolean dispatchKeyEvent(KeyEvent e) {
-					
-		//picture after klick
-					lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea2whatDOweDO.png"))); 
-					System.out.println("Got key event!");
-					return false;
-				}
-			});
+		lblNewLabel2 = new JLabel("");
+		lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
+		contentPane.add(lblNewLabel2);
 
-			//kollar om någon trycker på en key på tangentbordet
-            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-					@Override
-					public boolean dispatchKeyEvent(KeyEvent e) {
-						lblNewLabel.setIcon(null);
-						System.out.println("Got key event!");
-						return false;
-					}
+		// Main.
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Connect to firebase.
+				connectFirebase("medea2");
+			}
+		}).start();
+	}
+
+	/**
+	 * Called when screen is activated.
+	 */
+	private void activateScreen() {
+		//picture after klick
+		lblNewLabel.setIcon(null);
+		lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/medea2whatDOweDO.png")));
+	}
+	
+	/**
+	 * Called when screen is deactivated.
+	 */
+	private void deactivateScreen() {
+		lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
+		lblNewLabel2.setIcon(null);
+	}
+	
+	private void connectFirebase(String screenName) {
+		// Connect to Firebase.
+		Firebase fbRef = new Firebase("https://kd401ag1.firebaseio.com/");
+		fbRef.authAnonymously(new AuthResultHandler() {
+			
+			@Override
+			public void onAuthenticationError(FirebaseError error) {
+			    System.out.println("Login Failed! " + error.toString());
+			}
+			
+			@Override
+			public void onAuthenticated(AuthData authData) {
+			    // Read value from firebase.
+				fbRef.child("screens").addValueEventListener(new ValueEventListener() {
+					/**
+					 * Called when data is changed.
+					 */
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+				        if(snapshot.child(screenName).getValue(String.class).equals("active")) {
+				        	activateScreen();
+				        } else {
+				        	deactivateScreen();
+				        }
+				    }
+				    
+				    /**
+				     * Called when canceling.
+				     */
+				    @Override
+				    public void onCancelled(FirebaseError firebaseError) {
+				        System.out.println("The read failed: " + firebaseError.getMessage());
+				    }
 				});
-		
-		
+			}
+		});
 	}
 }
