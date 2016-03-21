@@ -87,6 +87,7 @@ public class Screen2GUI extends JFrame {
 				}
 			});
 
+			//kollar om någon trycker på en key på tangentbordet
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 					@Override
 					public boolean dispatchKeyEvent(KeyEvent e) {

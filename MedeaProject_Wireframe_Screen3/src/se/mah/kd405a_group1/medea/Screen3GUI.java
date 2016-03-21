@@ -65,6 +65,7 @@ public class Screen3GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//gif
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
 		lblNewLabel.setBounds(260, 280, (int)width, (int)height);
@@ -76,7 +77,7 @@ public class Screen3GUI extends JFrame {
 		lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
 		contentPane.add(lblNewLabel2);
 	
-		
+		//kollar om någon trycker på en key på tangentbordet
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {

@@ -87,6 +87,7 @@ public class Screen1GUI extends JFrame  {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//arrow gif
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen1GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
 		lblNewLabel.setBounds(260, 280, (int)width, (int)height);
@@ -105,6 +106,7 @@ public class Screen1GUI extends JFrame  {
 		SoundcloudPlayer soundcloudPlayer = new SoundcloudPlayer("medea-vox");
 		//soundcloudPlayer.playTrack("/users/medea-vox/tracks/249648982/");
 
+		//kollar om någon trycker på en key på tangentbordet
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
@@ -121,7 +123,7 @@ public class Screen1GUI extends JFrame  {
 					
 					firstTimePlayAudio = false;
 				}
-				System.out.println("Got key event!");
+				System.out.println("Got key event!"); //prints if someone presses key
 				return false;
 			}
 		});
