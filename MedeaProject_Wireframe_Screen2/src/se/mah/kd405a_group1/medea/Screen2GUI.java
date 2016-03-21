@@ -66,14 +66,14 @@ public class Screen2GUI extends JFrame {
 				
 				JLabel lblNewLabel = new JLabel("");
 				lblNewLabel.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-				lblNewLabel.setBounds(270, 280, (int)width, (int)height);
+				lblNewLabel.setBounds(260, 280, (int)width, (int)height);
 				contentPane.add(lblNewLabel);
 		
 
 		// Start screen pic
 				JLabel lblNewLabel2 = new JLabel("");
 				lblNewLabel2.setIcon(new ImageIcon(Screen2GUI.class.getResource("/se/mah/kd405a_group1/medea/res/MedeaStart.png")));
-				lblNewLabel2.setBounds(0, 0, 1080, 1920);
+				lblNewLabel2.setBounds(0, 0, (int)width, (int)height);
 				contentPane.add(lblNewLabel2);
 			
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {

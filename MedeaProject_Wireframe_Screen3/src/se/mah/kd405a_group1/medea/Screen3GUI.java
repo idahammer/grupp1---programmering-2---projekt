@@ -67,7 +67,7 @@ public class Screen3GUI extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Screen3GUI.class.getResource("/se/mah/kd405a_group1/medea/res/arrowz2.gif")));
-		lblNewLabel.setBounds(500, 900, (int)width, (int)height);
+		lblNewLabel.setBounds(260, 280, (int)width, (int)height);
 		contentPane.add(lblNewLabel);
 		
 		// Start screen pic
