@@ -1,3 +1,5 @@
+//SCREEN 2
+
 package se.mah.kd405a_group1.medea;
 
 import java.awt.BorderLayout;
