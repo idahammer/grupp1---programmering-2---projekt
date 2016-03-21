@@ -57,7 +57,7 @@ public class Screen2GUI extends JFrame {
 		this.setBounds(0, 0, (int)width, (int)height); 
 		this.setUndecorated(true);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.PINK);
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
